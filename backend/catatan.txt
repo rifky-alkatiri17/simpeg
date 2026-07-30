@@ -1,0 +1,34 @@
+React
+    │
+POST /pegawai
+    │
+Routes
+    │
+Controller
+    │
+Model
+    │
+MySQL
+
+/*--------------------------------
+1. Pendahuluan
+----------------------------------*/
+
+Intinya, pembagian tugasnya adalah:
+Routes → Menentukan URL dan metode HTTP (GET, POST, PUT, DELETE) serta memilih controller yang akan dijalankan.
+Controller → Menerima request, melakukan validasi atau logika aplikasi, memanggil model, lalu mengirimkan response ke client.
+Model → Berinteraksi langsung dengan database (menjalankan query SQL) dan mengembalikan hasilnya ke controller.
+
+Pemisahan ini membuat kode lebih rapi, mudah diuji, dan mudah dikembangkan saat aplikasi kepegawaian Anda bertambah besar.
+
+/*--------------------------------
+2. NPM
+----------------------------------*/
+
+| Package | Fungsi                                          |
+| ------- | ----------------------------------------------- |
+| express | Web server                                      |
+| mysql2  | Koneksi MySQL                                   |
+| cors    | Mengizinkan React mengakses backend             |
+| dotenv  | Menyimpan konfigurasi seperti password database |
+| multer  | Upload file                                     |
