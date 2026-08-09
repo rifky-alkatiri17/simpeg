@@ -11,16 +11,16 @@ export const menus = [
         title: "Dashboard",
         path: "/",
         icon: FaHome,
+    },    
+    {
+        title: "Master",
+        path: "/master",
+        icon: FaDatabase,
     },
     {
         title: "Pegawai",
         path: "/pegawai",
         icon: FaUsers,
-    },
-    {
-        title: "Master",
-        path: "/master",
-        icon: FaDatabase,
     },
     {
         title: "Laporan",

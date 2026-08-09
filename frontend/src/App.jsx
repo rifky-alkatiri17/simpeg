@@ -22,13 +22,13 @@ function App() {
                 />
 
                 <Route
-                    path="/pegawai"
-                    element={<Pegawai />}
+                    path="/master"
+                    element={<Master />}
                 />
 
                 <Route
-                    path="/master"
-                    element={<Master />}
+                    path="/pegawai"
+                    element={<Pegawai />}
                 />
 
                 <Route
