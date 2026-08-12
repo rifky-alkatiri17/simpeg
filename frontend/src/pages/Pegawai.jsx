@@ -1,14 +1,46 @@
-import { useState } from "react";
-import pegawai from "../data/pegawai.json";
+import { useState, useEffect } from "react";
+// import pegawai from "../data/pegawai.json";
 import "./css/Pegawai.css";
+
+import axios from "axios";
+
+
 
 function Pegawai() {
     const [search, setSearch] = useState("");
+    const [pegawai, setPegawai] = useState([]);
 
     const filteredPegawai = pegawai.filter((item) =>
-        item. Nama.toLowerCase().includes(search.toLowerCase()) ||
-        item.NIP.includes(search)
+        item.nama.toLowerCase().includes(search.toLowerCase()) ||
+        item.nip_baru.includes(search)
     );
+
+    useEffect(() => {
+        /*const getData = async () =>{
+            axios.get("http://localhost:3000/pegawai")
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+            });
+        }*/
+
+        const getData = async () => {
+            const response = await fetch(
+                "http://localhost:3000/pegawai"
+            );
+             
+            const pegawai = await response.json();
+            console.log(pegawai);
+
+            setPegawai(pegawai)
+
+        };
+
+        getData();
+
+    }, []);
 
     return (
         <div className="pegawai-page">
@@ -34,24 +66,30 @@ function Pegawai() {
                 <table>
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th>Id</th>
                             <th>NIP</th>
-                            <th>Nama</th>
+                            <th>Nama</th>                            
+                            <th>Status ASN</th>
                             <th>Pangkat/Golongan</th>
                             <th>Jabatan</th>
+                            <th>Unit Kerja</th>
                         </tr>
                     </thead>
 
-                    <tbody>
-                        {filteredPegawai.map((item, index) => (
-                            <tr key={item.No}>
-                                <td>{index + 1}</td>
-                                <td>{item.NIP}</td>
-                                <td>{item.Nama}</td>
-                                <td>{item.Pangkat_Gol}</td>
-                                <td>{item.Jabatan}</td>
-                            </tr>
-                        ))}
+                    <tbody>                        
+                        {filteredPegawai.map((item, index) =>{
+                            return(
+                                <tr key={item.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{item.nip_baru}</td>
+                                    <td>{item.nama}</td>
+                                    <td>{item.status_cpns_pns === "P" || item.status_cpns_pns === "C"? "PNS" : "PPPK" }</td>
+                                    <td>{item.gol_akhir_nama}</td>
+                                    <td>{item.jabatan_nama}</td>
+                                    <td>{item.unor_nama}</td>
+                                </tr>
+                            )
+                        })}                        
                     </tbody>
                 </table>
 
