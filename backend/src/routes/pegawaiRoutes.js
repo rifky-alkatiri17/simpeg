@@ -1,7 +1,20 @@
 import express from "express";
-import { index } from "../controllers/pegawaiController.js";
+import {ambilPegawaiByPage, ambilPegawai} from "../controllers/pegawaiController.js";
 
 const router = express.Router();
-router.get("/:indx", index);
+
+router.get("/:index", ambilPegawaiByPage);
+router.get("/:nama", ambilPegawai);
+/*router.post("/", tambahPegawai);
+router.put("/:indx", ubahPegawai);
+router.delete("/:indx", hapusPegawai);*/
 
 export default router;
+
+/*
+readAllPegawai,
+readPegawai,
+createPegawai,
+updatePegawai,
+deletePegawai} from "../models/pegawaiModel.js";
+*/

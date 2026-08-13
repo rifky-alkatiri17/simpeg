@@ -30,7 +30,7 @@ function Pegawai() {
             const response = await fetch(
                 "http://localhost:3000/pegawai"
             );
-             
+
             const pegawai = await response.json();
             console.log(pegawai);
 

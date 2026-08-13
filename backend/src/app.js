@@ -8,9 +8,27 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/pegawai", pegawaiRoutes)
-app.use("/", (req, res)=>{
+app.use("/pegawai", pegawaiRoutes);
+// app.use("/other", otherRoutes);
+/*app.use("/", (req, res)=>{
 	res.send("<h1>Hello World</h1>")
-});
+});*/
+app.use("/", beranda);
 
 export default app;
+
+
+/*===================
+CATATAN
+=====================*/
+
+/*app adalah aplikasi Express utama.
+
+Biasanya digunakan untuk:
+
+middleware global
+konfigurasi CORS: Cross Origin Request (Request Lintas server/port)
+express.json(): mengenali header json
+memasang router
+menentukan port
+menjalankan server*/
