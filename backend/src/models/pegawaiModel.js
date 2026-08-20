@@ -20,15 +20,16 @@ const readAllPegawai = async () => {
 
 const readPegawaiByPage = async (index) => {
     const [rows] = await db.query(
-        `SELECT id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama FROM tb_asn ORDER BY id LIMIT ?,10`, [index] );
+        `SELECT id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama FROM tb_asn ORDER BY id LIMIT ?,10`, [index]);
 
     return rows;
 };
 
 
-const readPegawai = async (nama) => {
+const readPegawaiByName = async (key) => {
+    /*key berupa nama atau nip*/
     const [rows] = await db.query(
-        `SELECT id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama FROM tb_asn WHERE nama LIKE "%${nama}%" ORDER BY id`
+        `SELECT id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama FROM tb_asn WHERE nama LIKE "%${key}%" OR nip_baru LIKE "%${key}%" ORDER BY id`
     );
 
     return rows;
@@ -54,6 +55,6 @@ const deletePegawai = async (id) => {
     return rows;
 };
 
-export {jumlahBarisData, readAllPegawai, readPegawaiByPage,readPegawai, createPegawai, updatePegawai, deletePegawai}
+export { jumlahBarisData, readAllPegawai, readPegawaiByPage, readPegawaiByName, createPegawai, updatePegawai, deletePegawai }
 
 // id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama

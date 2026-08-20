@@ -1,10 +1,11 @@
 import express from "express";
-import {ambilPegawaiByPage, ambilPegawai} from "../controllers/pegawaiController.js";
+// import { ambilPegawaiByPage, ambilPegawaiByName } from "../controllers/pegawaiController.js";
+import { ambilPegawai } from "../controllers/pegawaiController.js";
+
 
 const router = express.Router();
 
-router.get("/:index", ambilPegawaiByPage);
-router.get("/:nama", ambilPegawai);
+router.get("/", ambilPegawai);
 /*router.post("/", tambahPegawai);
 router.put("/:indx", ubahPegawai);
 router.delete("/:indx", hapusPegawai);*/

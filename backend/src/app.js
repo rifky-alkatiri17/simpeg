@@ -1,17 +1,36 @@
 import express from "express";
 import cors from "cors";
-import pegawaiRoutes from "./routes/pegawaiRoutes.js";
+import pegawaiPgRoutes from "./routes/pegawaiRoutes.js";
+// import { ambilPegawaiByPage, ambilPegawaiByName } from "./controllers/pegawaiController.js";
 import beranda from "./pages/home.js";
 
+/*===========
+instansiasi
+============*/
 const app = express();
 
+/*=====
+config
+======*/
 app.use(express.json());
 app.use(cors());
 
-app.use("/pegawai", pegawaiRoutes);
-// app.use("/other", otherRoutes);
-/*app.use("/", (req, res)=>{
-	res.send("<h1>Hello World</h1>")
+/*=======
+routes
+========*/
+app.use("/pegawai", pegawaiPgRoutes);
+/*app.get("/pegawai", (req, res) =>{
+    const {name, index} = req.query;
+    // console.log(req.query);
+    if (name) {
+        return ambilPegawaiByName;
+        // console.log("By Name");
+    }
+
+    if (index) {
+        return ambilPegawaiByPage;
+        // console.log("By Page");
+    }
 });*/
 app.use("/", beranda);
 
