@@ -6,26 +6,32 @@ import Header from "../components/Header";
 
 function MainLayout() {
 
-    return (
-        <>
+    return ( <
+        >
 
-            <Sidebar />
+        <Sidebar />
 
-            <section className="main">
+        <
+        section className = "main" >
 
-                <Header />
+        <Header />
 
-                <div className="content">
+        <
+        div className = "content" >
 
-                    <Outlet />
+        <Outlet />
 
-                </div>
+        <
+        /div>
 
-            </section>
+        <
+        /section>
 
-            <BottomNav />
+        <
+        BottomNav / >
 
-        </>
+        <
+        />
     );
 }
 

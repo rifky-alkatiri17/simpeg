@@ -1,14 +1,24 @@
 import { useState, useEffect } from "react";
 // import pegawai from "../data/pegawai.json";
 import "./css/Pegawai.css";
-import Pagination from "./Pagination"
+// import Pagination from "./Pagination"
 import axios from "axios";
+
+import {
+  ButtonGroup,
+  Heading,
+  IconButton,
+  Pagination,
+  Stack,
+  Table,
+} from "@chakra-ui/react"
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu"
 
 
 
 function Pegawai() {
     const [pegawai, setPegawai] = useState([]);
-   
+
     const filteredPegawai = async (val) => {
         const response = await fetch("http://localhost:3000/pegawai?name=" + `${val}`);
         const pegawai = await response.json();
@@ -26,7 +36,7 @@ function Pegawai() {
 
         setPegawai(pegawai);
 
-    };  
+    };
 
     useEffect(() => {
         /*const getData = async () =>{
@@ -37,21 +47,21 @@ function Pegawai() {
                 .catch((error) => {
                     console.error(error);
             });
-        }*/       
+        }*/
 
         getData(); /*ex: 4111*/
 
     }, []);
 
     return (
-        <div className="pegawai-page">
+        <div className="pegawai-page" >
 
-            <div className="page-header">
+            <div className="page-header" style={{color: "purple", fontWeight: "bold"}}>
                 <h1>Data Pegawai</h1>
                 <p>Daftar pegawai/ASN</p>
             </div>
 
-            <div className="table-container">
+            <div className="table-container" style={{color: "purple", fontWeight: "bold"}}>
 
                 <div className="table-header">
 
@@ -76,7 +86,7 @@ function Pegawai() {
 
                 </div>
 
-                <table>
+                {/*<table>
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -104,7 +114,54 @@ function Pegawai() {
                             )
                         })}                        
                     </tbody>
-                </table>
+                </table>*/}
+
+                {/*tabel versi chakra*/}
+                <Stack width="full" gap="5">
+                  <Heading size="xl">Products</Heading>
+                  <Table.Root size="sm" variant="outline" striped>
+                    <Table.Header>
+                      <Table.Row>
+                        <Table.ColumnHeader>ID</Table.ColumnHeader>
+                        <Table.ColumnHeader>NIP</Table.ColumnHeader>
+                        <Table.ColumnHeader>Nama</Table.ColumnHeader>
+                      </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                      {pegawai.map((item) => (
+                        <Table.Row key={item.id}>
+                          <Table.Cell>{item.id}</Table.Cell>
+                          <Table.Cell>{item.nip_baru}</Table.Cell>
+                          <Table.Cell textAlign="end">{item.nama}</Table.Cell>
+                        </Table.Row>
+                      ))}
+                    </Table.Body>
+                  </Table.Root>
+
+                  <Pagination.Root count={pegawai.length * 5} pageSize={5} page={1} style={{color: "purple", fontWeight: "bold"}}>
+                    <ButtonGroup variant="ghost" size="sm" wrap="wrap">
+                      <Pagination.PrevTrigger asChild style={{color: "purple", fontWeight: "bold"}}>
+                        <IconButton>
+                          <LuChevronLeft />
+                        </IconButton>
+                      </Pagination.PrevTrigger>
+
+                      <Pagination.Items
+                        render={(page) => (
+                          <IconButton variant={{ base: "ghost", _selected: "outline" }}>
+                            {page.value}
+                          </IconButton>
+                        )}
+                      style={{color: "purple", fontWeight: "bold"}} />
+
+                      <Pagination.NextTrigger asChild style={{color: "purple", fontWeight: "bold"}}>
+                        <IconButton>
+                          <LuChevronRight />
+                        </IconButton>
+                      </Pagination.NextTrigger>
+                    </ButtonGroup>
+                  </Pagination.Root>
+                </Stack>
 
                 {pegawai.length === 0 && (
                     <div className="empty">
@@ -112,7 +169,7 @@ function Pegawai() {
                     </div>
                 )}
 
-                <Pagination />
+                {/*<Pagination />*/}
 
             </div>
 
