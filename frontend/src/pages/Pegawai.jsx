@@ -118,13 +118,17 @@ function Pegawai() {
 
                 {/*tabel versi chakra*/}
                 <Stack width="full" gap="5">
-                  <Heading size="xl">Products</Heading>
+                  <Heading size="xl">Pegawai</Heading>
                   <Table.Root size="sm" variant="outline" striped>
                     <Table.Header>
-                      <Table.Row>
-                        <Table.ColumnHeader>ID</Table.ColumnHeader>
-                        <Table.ColumnHeader>NIP</Table.ColumnHeader>
-                        <Table.ColumnHeader>Nama</Table.ColumnHeader>
+                      <Table.Row >
+                        <Table.ColumnHeader color="blue.500">ID</Table.ColumnHeader>
+                        <Table.ColumnHeader color="blue.500">NIP</Table.ColumnHeader>
+                        <Table.ColumnHeader color="blue.500">Nama</Table.ColumnHeader>
+                        <Table.ColumnHeader color="blue.500">Status</Table.ColumnHeader>
+                        <Table.ColumnHeader color="blue.500">Gol</Table.ColumnHeader>
+                        <Table.ColumnHeader color="blue.500">Jabatan</Table.ColumnHeader>
+                        <Table.ColumnHeader color="blue.500">Unor</Table.ColumnHeader>
                       </Table.Row>
                     </Table.Header>
                     <Table.Body>
@@ -132,7 +136,11 @@ function Pegawai() {
                         <Table.Row key={item.id}>
                           <Table.Cell>{item.id}</Table.Cell>
                           <Table.Cell>{item.nip_baru}</Table.Cell>
-                          <Table.Cell textAlign="end">{item.nama}</Table.Cell>
+                          <Table.Cell>{item.nama}</Table.Cell>
+                          <Table.Cell>{item.status_cpns_pns}</Table.Cell>
+                          <Table.Cell>{item.gol_akhir_nama}</Table.Cell>
+                          <Table.Cell>{item.jabatan_nama}</Table.Cell>
+                          <Table.Cell>{item.unor_nama}</Table.Cell>
                         </Table.Row>
                       ))}
                     </Table.Body>
