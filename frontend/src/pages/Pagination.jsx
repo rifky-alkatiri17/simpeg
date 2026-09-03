@@ -1,9 +1,24 @@
-export default function Pagination() {
+import { ButtonGroup, IconButton, Pagination } from "@chakra-ui/react";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+
+export default function Navigasi() {
     return (
-        <div className="css-1m0jmkq">
-    	<div class="chakra-stack css-1c093hy">
-		<div class="css-19vsdx2">Showing 11 to 20 of 9453 employees</div>
-		<div class="chakra-stack css-i743g3"><button type="button" class="chakra-button css-1r661dj">
-		<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="15 18 9 12 15 6"></polyline></svg></button><div class="css-1c9eear">Page 2 of 946</div><button type="button" class="chakra-button css-1r661dj"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="9 18 15 12 9 6"></polyline></svg></button></div></div><div class="chakra-stack css-1i592hp"><div class="css-v0otzr">Showing 11 to 20 of 9453 employees</div><div class="chakra-stack css-1x0y7ph"><button type="button" class="chakra-button css-1r661dj"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="15 18 9 12 15 6"></polyline></svg></button><div class="css-1c9eear">Page 2 of 946</div><button type="button" class="chakra-button css-1r661dj"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="9 18 15 12 9 6"></polyline></svg></button></div></div></div>
-    )
+    	<Pagination.Root count={500} pageSize={10} defaultPage={1} maxW="240px">
+	      <ButtonGroup variant="ghost" size="sm" w="full">
+	        <Pagination.PageText format="long" flex="1" />
+	        <Pagination.PrevTrigger asChild>
+	          <IconButton>
+	            <LuChevronLeft />
+	          </IconButton>
+	        </Pagination.PrevTrigger>
+	        <Pagination.NextTrigger asChild>
+	          <IconButton>
+	            <LuChevronRight />
+	          </IconButton>
+	        </Pagination.NextTrigger>
+	      </ButtonGroup>	      
+	    </Pagination.Root>
+    )   
 }
+
+
