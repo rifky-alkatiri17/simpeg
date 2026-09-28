@@ -4,20 +4,38 @@ import {
     readPegawaiByName,
     createPegawai,
     updatePegawai,
-    deletePegawai
+    deletePegawai,
+    jumlahBarisData
 } from "../models/pegawaiModel.js";
+
+
+const totalPegawai = async (req, res) => {
+    // res.send(req.params)
+    if (req.params.params == "jumlah") {
+        try {
+            const data = await jumlahBarisData();
+            res.json(data)
+        } catch (err) {
+            res.status(500).json({
+                message: err.message
+            });
+        }
+    } else {
+        res.send(tampilanError)
+    }
+}
 
 const ambilPegawai = (req, res) => {
     const { name, page } = req.query;
     // console.log(req.query);
 
     if (name) {
-        return ambilPegawaiByName(req,res);
+        return ambilPegawaiByName(req, res);
         // console.log('nama...')
     }
 
     if (page) {
-        return ambilPegawaiByPage(req,res);
+        return ambilPegawaiByPage(req, res);
         // console.log('page...')
     } else {
         res.send(tampilanError)
@@ -62,11 +80,11 @@ const ambilPegawaiByName = async (req, res) => {
             message: err.message
         });
 
-    }   
+    }
 };
 
 // export { ambilPegawaiByPage, ambilPegawaiByName }
-export { ambilPegawai };
+export { ambilPegawai, totalPegawai };
 
 /*===================================
 TAMBAHAN SAJA

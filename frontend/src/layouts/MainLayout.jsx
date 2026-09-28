@@ -5,33 +5,19 @@ import BottomNav from "../components/BottomNav";
 import Header from "../components/Header";
 
 function MainLayout() {
+    return (
+        <>
+            <Sidebar />
 
-    return ( <
-        >
+            <section className="main">
+                <Header />
+                <div className="content">
+                    <Outlet />
+                </div>
+            </section>
 
-        <Sidebar />
-
-        <
-        section className = "main" >
-
-        <Header />
-
-        <
-        div className = "content" >
-
-        <Outlet />
-
-        <
-        /div>
-
-        <
-        /section>
-
-        <
-        BottomNav / >
-
-        <
-        />
+            <BottomNav />
+        </>
     );
 }
 

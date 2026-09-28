@@ -6,12 +6,11 @@ import {
     FaUserCircle,
 } from "react-icons/fa";
 
-export const menus = [
-    {
+export const menus = [{
         title: "Dashboard",
         path: "/",
         icon: FaHome,
-    },    
+    },
     {
         title: "Master",
         path: "/master",
