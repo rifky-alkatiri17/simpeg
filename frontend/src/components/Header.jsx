@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { menus } from "../data/menu";
+import { Box, Center } from "@chakra-ui/react";
+
 
 function Header() {
 
@@ -10,11 +12,9 @@ function Header() {
     );
 
     return (
-        <header className="header">
-
-            <h2>{page?.title}</h2>
-
-        </header>
+        <Box className="header">
+            {page?.title}
+        </Box>
     );
 }
 

@@ -1,32 +1,38 @@
 import { ButtonGroup, IconButton, Pagination, Center, Flex } from "@chakra-ui/react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-const myStyle = {"color":"white", "fontWeight":"bold"};
+const myStyle = { "color": "white", "fontWeight": "bold" };
 
-export default function Navigasi({ start, jlhPegawai, onHandleNext, onHandlePrev }) {
-	return (
-		<Flex justify="center">
+export default function Navigasi({ jlhPegawai, page, onHandleNext, onHandlePrev }) {
+	// rumus pagination
+	const pageSize = 10;           
+    const start = ((page - 1) * pageSize + 1);
+    const end = (Math.min(page * pageSize, jlhPegawai));
+
+
+    return (
+        <Flex justify="center">
 			<Pagination.Root
 				count={Number(jlhPegawai)}
-				pageSize={10}
-				defaultPage={start}			
+				pageSize={pageSize}
+				defaultPage={1}			
 			>
 				<ButtonGroup variant="ghost" size="sm" w="full">
 					{/*<Pagination.PageText format="long" flex="1" />*/}
 					<Center {...myStyle}>
-						Menampilkan data {start} - {start+9} dari {Number(jlhPegawai)}
+						Menampilkan data {start} - {end} dari {Number(jlhPegawai)}
 					</Center>
-					<Pagination.PrevTrigger asChild onClick={onHandlePrev()}>
-						<IconButton>
+					<Pagination.PrevTrigger asChild>
+						<IconButton onClick={onHandlePrev}>
 							<LuChevronLeft />
 						</IconButton>
 					</Pagination.PrevTrigger>
-					<Pagination.NextTrigger asChild onClick={onHandleNext()}>
-						<IconButton>
+					<Pagination.NextTrigger asChild>
+						<IconButton onClick={onHandleNext}>
 							<LuChevronRight />
 						</IconButton>
 					</Pagination.NextTrigger>
 				</ButtonGroup>
 			</Pagination.Root>
 		</Flex>
-	);
+    );
 }

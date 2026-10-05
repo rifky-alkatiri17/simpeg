@@ -5,11 +5,13 @@ import {
     createPegawai,
     updatePegawai,
     deletePegawai,
-    jumlahBarisData
+    jumlahBarisData,
+    readJlhPegawaiByName
 } from "../models/pegawaiModel.js";
 
 
 const totalPegawai = async (req, res) => {
+    const {jlhAll, jlhByName} = req.query;
     // res.send(req.params)
     if (req.params.params == "jumlah") {
         try {
@@ -20,7 +22,10 @@ const totalPegawai = async (req, res) => {
                 message: err.message
             });
         }
-    } else {
+    }
+    /*if(jlhByName){ 
+    }*/
+    else {
         res.send(tampilanError)
     }
 }
@@ -76,12 +81,30 @@ const ambilPegawaiByName = async (req, res) => {
         res.json(data);
 
     } catch (err) {
+        console.log('error terjadi...')
         res.status(500).json({
             message: err.message
         });
 
     }
 };
+
+const ambilJlhPegawaiByName = async (req,res) => {
+    let name = req.query.name;
+    // console.log(name);
+
+    try {
+        const data = await readJlhPegawaiByName(name);
+        res.json(data);
+
+    } catch (err) {
+        console.log('error terjadi...')
+        res.status(500).json({
+            message: err.message
+        });
+
+    }
+}
 
 // export { ambilPegawaiByPage, ambilPegawaiByName }
 export { ambilPegawai, totalPegawai };
