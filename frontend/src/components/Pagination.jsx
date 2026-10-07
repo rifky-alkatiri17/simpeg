@@ -3,8 +3,8 @@ import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 const myStyle = { "color": "white", "fontWeight": "bold" };
 
 export default function Navigasi({ jlhPegawai, page, onHandleNext, onHandlePrev }) {
-	// rumus pagination
-	const pageSize = 10;           
+    // rumus pagination
+    const pageSize = 10;
     const start = ((page - 1) * pageSize + 1);
     const end = (Math.min(page * pageSize, jlhPegawai));
 
@@ -14,7 +14,7 @@ export default function Navigasi({ jlhPegawai, page, onHandleNext, onHandlePrev 
 			<Pagination.Root
 				count={Number(jlhPegawai)}
 				pageSize={pageSize}
-				defaultPage={1}			
+				defaultPage={start}			
 			>
 				<ButtonGroup variant="ghost" size="sm" w="full">
 					{/*<Pagination.PageText format="long" flex="1" />*/}

@@ -5,13 +5,13 @@ import {
     createPegawai,
     updatePegawai,
     deletePegawai,
-    jumlahBarisData,
-    readJlhPegawaiByName
+    jumlahBarisData,    
 } from "../models/pegawaiModel.js";
 
+// readJlhPegawaiByName
 
 const totalPegawai = async (req, res) => {
-    const {jlhAll, jlhByName} = req.query;
+    // const {jlhAll, jlhByName} = req.query;
     // res.send(req.params)
     if (req.params.params == "jumlah") {
         try {
@@ -49,6 +49,8 @@ const ambilPegawai = (req, res) => {
     // default
 };
 
+// -------------------------------------------------------------------------------------
+
 
 // const ambilSemuaPegawai = async () => {}
 
@@ -74,10 +76,12 @@ const ambilPegawaiByName = async (req, res) => {
     //Support Name or NIP
     // const nama = req.params.nama;
     let name = req.query.name;
-    // console.log(name);
+    let page = Number(req.query.page);
+    /*console.log(name);
+    console.log(offset);*/
 
     try {
-        const data = await readPegawaiByName(name);
+        const data = await readPegawaiByName(name, page);
         res.json(data);
 
     } catch (err) {

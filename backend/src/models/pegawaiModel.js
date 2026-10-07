@@ -29,28 +29,30 @@ const readPegawaiByPage = async (page) => {
 };
 
 
-const readPegawaiByName = async (key) => {
+const readPegawaiByName = async (key, page=1) => {
     const pageSize = 10;
-    const offset = 1;
+    const offset = (page - 1) * pageSize;
 
     /*key berupa nama atau nip*/
     const [rows] = await db.query(
-        `SELECT id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama FROM tb_asn WHERE nama LIKE "%${key}%" OR nip_baru LIKE "%${key}%" ORDER BY id LIMIT ?, ?`, [offset, pageSize]);    
+        `SELECT id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama FROM tb_asn WHERE nama LIKE "%${key}%" OR nip_baru LIKE "%${key}%" ORDER BY id LIMIT ?, ?`, [offset, pageSize]);
 
-    return rows;
+    const [jumlah] =  await db.query(`SELECT COUNT(*) AS total FROM tb_asn WHERE nama LIKE "%${key}%" OR nip_baru LIKE "%${key}%" ORDER BY id `);    
+
+    return [rows,jumlah];
 };
 
-const readJlhPegawaiByName = async (key) => {
+/*const readJlhPegawaiByName = async (key) => {
     const pageSize = 10;
     const offset = 1;
 
-    /*key berupa nama atau nip*/
-    /*const [rows] = await db.query(
-        `SELECT id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama FROM tb_asn WHERE nama LIKE "%${key}%" OR nip_baru LIKE "%${key}%" ORDER BY id `); */
+    // key berupa nama atau nip
+    //const [rows] = await db.query(
+        `SELECT id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama FROM tb_asn WHERE nama LIKE "%${key}%" OR nip_baru LIKE "%${key}%" ORDER BY id `); 
     const [rows] =  await db.query(`SELECT COUNT(*) AS total FROM tb_asn WHERE nama LIKE "%${key}%" OR nip_baru LIKE "%${key}%" ORDER BY id `);  
 
     return rows;
-}
+}*/
 
 const createPegawai = async () => {
     // const [rows] = await db.query();
@@ -72,6 +74,7 @@ const deletePegawai = async (id) => {
     return rows;
 };
 
-export { jumlahBarisData, readAllPegawai, readPegawaiByPage, readPegawaiByName, readJlhPegawaiByName, createPegawai, updatePegawai, deletePegawai }
+export { jumlahBarisData, readAllPegawai, readPegawaiByPage, readPegawaiByName, createPegawai, updatePegawai, deletePegawai }
 
+// readJlhPegawaiByName
 // id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama

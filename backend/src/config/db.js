@@ -7,4 +7,6 @@ const db = mysql.createPool({
     database: "db_pemkotkupang"
 });
 
+//console.log(db);
+
 export default db;

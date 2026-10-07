@@ -1,38 +1,34 @@
 import { useState, useEffect } from "react";
 // import pegawai from "../data/pegawai.json";
 // import "./css/Pegawai.css";
-import Navigasi from "./Pagination";
+import Navigasi from "./../components/Pagination";
 import axios from "axios";
 
 import { Stack, Table, Box, Center, Input } from "@chakra-ui/react";
-// import { LuChevronLeft, LuChevronRight } from "react-icons/lu"
 
 function Pegawai() {
     const [pegawai, setPegawai] = useState([]);
     const [jlhPegawai, setJlhPegawai] = useState(0);
     const [page, setPage] = useState(1);
+    const [search, setSearch] = useState("");
     
-    const filteredPegawai = async (val) => {
+    const filteredPegawai = async (val, page) => {
         // console.log(val)
         try{            
-            /*const response = await fetch(
-                `http://localhost:3000/pegawai?name=${val}`,
-            );
-
-            if (!response.ok) {
+            /*if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }*/
 
-            const [resPegawai, resJumlah] = await Promise.all([
-                fetch(`http://localhost:3000/pegawai?name=${val}`),
-                fetch(`http://localhost:3000/pegawai`)
-            ]);
-
-            const pegawai = await response.json();
-            // console.log(pegawai);
+            const hasil = await fetch(`http://localhost:3000/pegawai?name=${val}&page=${page}`);            
+            const hasil2 = await hasil.json();
+            // console.log( hasil2 );
+            const [pegawai, jumlah] = hasil2;
+            console.log(pegawai);
+            console.log(jumlah[0].total);
             setPegawai(pegawai);
+            setJlhPegawai(Number(jumlah[0].total));
         }catch(error){
-            console.log('Terjadi Kesalahan...',error);            
+            console.log('Terjadi Kesalahan...', error);            
         }
     };
 
@@ -54,13 +50,19 @@ function Pegawai() {
         setJlhPegawai(jumlah[0].total);
     };    
 
-    useEffect(() => {
-        getData(page); /*ex: 4111*/        
+    useEffect(() => {        
+        if (search == ""){
+            getData(page)
+            console.log('getData')
+        }else{
+            filteredPegawai(search, page)
+            console.log('filteredPegawai')
+        }
     }, [page]);
 
 
-    const handleNext = () => {
-        setPage(page + 1);        
+    const handleNext = () => {       
+        setPage(page + 1);       
     };
 
     const handlePrev = () => {
@@ -80,9 +82,10 @@ function Pegawai() {
                     if (e.key === "Enter") {
                         const inputLength = e.target.value.length;
                         if (inputLength > 4) {
-                            filteredPegawai(e.target.value);
+                            setSearch(e.target.value);
+                            filteredPegawai(e.target.value, page);
                         } else if (inputLength === 0) {
-                            getData();
+                            getData(page);
                             // alert('Kotak Pencarian Kosong..')
                         } else {
                             alert("Masukkan min 5 karakter...");
