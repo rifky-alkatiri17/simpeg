@@ -18,7 +18,7 @@ function Pegawai() {
             /*if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }*/
-
+            // setPage(1);
             const hasil = await fetch(`http://localhost:3000/pegawai?name=${val}&page=${page}`);            
             const hasil2 = await hasil.json();
             // console.log( hasil2 );
@@ -50,14 +50,14 @@ function Pegawai() {
         setJlhPegawai(jumlah[0].total);
     };    
 
-    useEffect(() => {        
-        if (search == ""){
+    useEffect(() => {
+        if(search == ""){
             getData(page)
-            console.log('getData')
         }else{
+            console.log(search);
             filteredPegawai(search, page)
-            console.log('filteredPegawai')
-        }
+        }        
+        
     }, [page]);
 
 
@@ -82,9 +82,12 @@ function Pegawai() {
                     if (e.key === "Enter") {
                         const inputLength = e.target.value.length;
                         if (inputLength > 4) {
+                            setPage(1);
                             setSearch(e.target.value);
                             filteredPegawai(e.target.value, page);
                         } else if (inputLength === 0) {
+                            setSearch("");
+                            setPage(1);
                             getData(page);
                             // alert('Kotak Pencarian Kosong..')
                         } else {

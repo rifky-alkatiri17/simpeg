@@ -14,7 +14,7 @@ export default function Navigasi({ jlhPegawai, page, onHandleNext, onHandlePrev 
 			<Pagination.Root
 				count={Number(jlhPegawai)}
 				pageSize={pageSize}
-				defaultPage={start}			
+				page={page}			
 			>
 				<ButtonGroup variant="ghost" size="sm" w="full">
 					{/*<Pagination.PageText format="long" flex="1" />*/}
