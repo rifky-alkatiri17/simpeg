@@ -1,5 +1,4 @@
 import express from "express";
-// import { ambilPegawaiByPage, ambilPegawaiByName } from "../controllers/pegawaiController.js";
 import { ambilPegawai, totalPegawai } from "../controllers/pegawaiController.js";
 
 

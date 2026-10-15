@@ -8,6 +8,7 @@ import Pegawai from "./pages/Pegawai";
 import Master from "./pages/Opd";
 import Laporan from "./pages/Laporan";
 import Profil from "./pages/Profil";
+import Details from "./pages/Details";
 
 function App() {
 
@@ -30,6 +31,11 @@ function App() {
                     path="/pegawai"
                     element={<Pegawai />}
                 />
+
+                <Route
+                    path="/details"
+                    element={<Details />}
+                /> 
 
                 <Route
                     path="/laporan"

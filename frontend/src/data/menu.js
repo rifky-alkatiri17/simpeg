@@ -4,6 +4,7 @@ import {
     FaDatabase,
     FaChartBar,
     FaUserCircle,
+    FaEye
 } from "react-icons/fa";
 
 export const menus = [{
@@ -31,4 +32,9 @@ export const menus = [{
         path: "/profil",
         icon: FaUserCircle,
     },
+    {
+        title: "Details",
+        path: "/details",
+        icon: FaEye,
+    }    
 ];

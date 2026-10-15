@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import pegawai from "../data/pegawai.json";
 // import "./css/Pegawai.css";
 import Navigasi from "./../components/Pagination";
@@ -11,15 +12,19 @@ function Pegawai() {
     const [jlhPegawai, setJlhPegawai] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
-    
+
+    const navigate = useNavigate();
+
     const filteredPegawai = async (val, page) => {
         // console.log(val)
-        try{            
+        try {
             /*if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }*/
             // setPage(1);
-            const hasil = await fetch(`http://localhost:3000/pegawai?name=${val}&page=${page}`);            
+            const hasil = await fetch(
+                `http://localhost:3000/pegawai?name=${val}&page=${page}`,
+            );
             const hasil2 = await hasil.json();
             // console.log( hasil2 );
             const [pegawai, jumlah] = hasil2;
@@ -27,8 +32,8 @@ function Pegawai() {
             console.log(jumlah[0].total);
             setPegawai(pegawai);
             setJlhPegawai(Number(jumlah[0].total));
-        }catch(error){
-            console.log('Terjadi Kesalahan...', error);            
+        } catch (error) {
+            console.log("Terjadi Kesalahan...", error);
         }
     };
 
@@ -48,25 +53,23 @@ function Pegawai() {
         setPegawai(pegawai);
         console.log(jumlah[0].total);
         setJlhPegawai(jumlah[0].total);
-    };    
+    };
 
     useEffect(() => {
-        if(search == ""){
-            getData(page)
-        }else{
+        if (search == "") {
+            getData(page);
+        } else {
             console.log(search);
-            filteredPegawai(search, page)
-        }        
-        
+            filteredPegawai(search, page);
+        }
     }, [page]);
 
-
-    const handleNext = () => {       
-        setPage(page + 1);       
+    const handleNext = () => {
+        setPage(page + 1);
     };
 
     const handlePrev = () => {
-        if(page>1){
+        if (page > 1) {
             setPage(page - 1);
         }
     };
@@ -102,34 +105,33 @@ function Pegawai() {
                 <Stack width="full" gap="5">
                     <Table.Root
                         size="sm"
-                        css={{ 
-                            "& th, & td": { 
-                                padding: "12px 16px" 
-                            } 
+                        css={{
+                            "& th, & td": {
+                                padding: "12px 16px",
+                            },
                         }}
                     >
                         <Table.Header color="red">
                             <Table.Row>
                                 <Table.ColumnHeader>ID</Table.ColumnHeader>
                                 <Table.ColumnHeader>NIP</Table.ColumnHeader>
-                                <Table.ColumnHeader>
-                                    Nama
-                                </Table.ColumnHeader>
-                                <Table.ColumnHeader>
-                                    Status
-                                </Table.ColumnHeader>
+                                <Table.ColumnHeader>Nama</Table.ColumnHeader>
+                                <Table.ColumnHeader>Status</Table.ColumnHeader>
                                 <Table.ColumnHeader>Gol</Table.ColumnHeader>
-                                <Table.ColumnHeader>
-                                    Jabatan
-                                </Table.ColumnHeader>
-                                <Table.ColumnHeader>
-                                    Unor
-                                </Table.ColumnHeader>
+                                <Table.ColumnHeader>Jabatan</Table.ColumnHeader>
+                                <Table.ColumnHeader>Unor</Table.ColumnHeader>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
                             {pegawai.map((item) => (
-                                <Table.Row key={item.id}>
+                                <Table.Row
+                                    key={item.id}
+                                    cursor="pointer"
+                                    _hover={{ bg: "gray" }}
+                                    onClick={() =>
+                                        navigate(`/details?id=${item.id}`)
+                                    }
+                                >
                                     <Table.Cell>{item.id}</Table.Cell>
                                     <Table.Cell>{item.nip_baru}</Table.Cell>
                                     <Table.Cell>{item.nama}</Table.Cell>
@@ -139,12 +141,8 @@ function Pegawai() {
                                     <Table.Cell>
                                         {item.gol_akhir_nama}
                                     </Table.Cell>
-                                    <Table.Cell>
-                                        {item.jabatan_nama}
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        {item.unor_nama}
-                                    </Table.Cell>
+                                    <Table.Cell>{item.jabatan_nama}</Table.Cell>
+                                    <Table.Cell>{item.unor_nama}</Table.Cell>
                                 </Table.Row>
                             ))}
                         </Table.Body>
@@ -156,15 +154,13 @@ function Pegawai() {
                             page={page}
                             onHandleNext={handleNext}
                             onHandlePrev={handlePrev}
-                        />    
+                        />
                     )}
                 </Stack>
 
                 {pegawai.length === 0 && (
                     <Box className="empty" p="4">
-                        <Center>
-                            Data pegawai tidak ditemukan.
-                        </Center>
+                        <Center>Data pegawai tidak ditemukan.</Center>
                     </Box>
                 )}
             </div>

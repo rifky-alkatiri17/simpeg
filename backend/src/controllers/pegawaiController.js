@@ -2,6 +2,7 @@ import {
     readAllPegawai,
     readPegawaiByPage,
     readPegawaiByName,
+    readPegawaiByID,
     createPegawai,
     updatePegawai,
     deletePegawai,
@@ -31,12 +32,16 @@ const totalPegawai = async (req, res) => {
 }
 
 const ambilPegawai = (req, res) => {
-    const { name, page } = req.query;
+    const { name, page, id } = req.query;
     // console.log(req.query);
 
     if (name) {
         return ambilPegawaiByName(req, res);
         // console.log('nama...')
+    }
+
+    if (id){
+        return ambilPegawaiByID(req, res);
     }
 
     if (page) {
@@ -71,6 +76,20 @@ const ambilPegawaiByPage = async (req, res) => {
     }
 };
 
+const ambilPegawaiByID = async (req,res) => {
+    let id = Number(req.query.id);
+
+    try {
+        const data = await readPegawaiByID(id);
+        res.json(data);
+
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        });
+
+    }
+}
 
 const ambilPegawaiByName = async (req, res) => {
     //Support Name or NIP

@@ -42,6 +42,11 @@ const readPegawaiByName = async (key, page=1) => {
     return [rows,jumlah];
 };
 
+const readPegawaiByID = async (id) => {   
+    const [rows] = await db.query(`SELECT * FROM tb_asn WHERE id = ?`, [id]);
+    return rows
+}
+
 /*const readJlhPegawaiByName = async (key) => {
     const pageSize = 10;
     const offset = 1;
@@ -74,7 +79,7 @@ const deletePegawai = async (id) => {
     return rows;
 };
 
-export { jumlahBarisData, readAllPegawai, readPegawaiByPage, readPegawaiByName, createPegawai, updatePegawai, deletePegawai }
+export { jumlahBarisData, readAllPegawai, readPegawaiByPage, readPegawaiByName, readPegawaiByID, createPegawai, updatePegawai, deletePegawai }
 
 // readJlhPegawaiByName
 // id, nip_baru, nama, status_cpns_pns, gol_akhir_nama, jabatan_nama, unor_nama

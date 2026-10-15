@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { menus } from "../data/menu";
 import {
-  Box,
-  Flex,
-  Grid,
-  Text,
-  IconButton,
+    Box,
+    Flex,
+    Grid,
+    Text    
 } from "@chakra-ui/react";
 
 function Sidebar() {
@@ -13,7 +12,7 @@ function Sidebar() {
         <aside className="sidebar">
             <h2 className="logo">SIM ASN</h2>
 
-            {menus.map((menu) => {
+            {menus.slice(0, 5).map((menu) => {
                 const Icon = menu.icon;
 
                 return (

@@ -5,7 +5,7 @@ function BottomNav() {
     return (
         <nav className="bottom-nav">
 
-            {menus.map((menu) => {
+            {menus.slice(0, 5).map((menu) => {
 
                 const Icon = menu.icon;
 
