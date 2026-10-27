@@ -1,4 +1,4 @@
-import { ButtonGroup, IconButton, Pagination, Center, Flex } from "@chakra-ui/react";
+import { ButtonGroup, IconButton, Pagination, Center, Flex, Text } from "@chakra-ui/react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 const myStyle = { "color": "white", "fontWeight": "bold" };
 
@@ -18,9 +18,9 @@ export default function Navigasi({ jlhPegawai, page, onHandleNext, onHandlePrev 
 			>
 				<ButtonGroup variant="ghost" size="sm" w="full">
 					{/*<Pagination.PageText format="long" flex="1" />*/}
-					<Center {...myStyle}>
+					<Text>
 						Menampilkan data {start} - {end} dari {Number(jlhPegawai)}
-					</Center>
+					</Text>
 					<Pagination.PrevTrigger asChild>
 						<IconButton onClick={onHandlePrev}>
 							<LuChevronLeft />

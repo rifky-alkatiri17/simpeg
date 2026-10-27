@@ -36,5 +36,5 @@ export const menus = [{
         title: "Details",
         path: "/details",
         icon: FaEye,
-    }    
+    }
 ];

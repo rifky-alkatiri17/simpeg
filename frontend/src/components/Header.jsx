@@ -3,7 +3,7 @@ import { menus } from "../data/menu";
 import { Box, Center, Flex } from "@chakra-ui/react";
 
 
-function Header() {
+function Header({ ...props }) {
 
     const location = useLocation();
 
@@ -14,12 +14,21 @@ function Header() {
         (item) => item.path === location.pathname
     );
 
-    console.log(page);
+    // console.log(page);
 
     return (
-        <Flex className="header" gap="4">
-            <Icon />
-            {page?.title}            
+        <Flex
+            {...props} 
+            alignItems="center"
+            pl="20px" 
+            h="50px" 
+            // bg="gray.500"
+        >
+
+            <Flex alignItems="center" gap={4}>
+                <Icon />
+                {page?.title}
+            </Flex>            
         </Flex>
     );
 }

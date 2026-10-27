@@ -30,6 +30,7 @@ function App() {
                 <Route
                     path="/pegawai"
                     element={<Pegawai />}
+                    
                 />
 
                 <Route

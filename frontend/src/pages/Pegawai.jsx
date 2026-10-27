@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 // import pegawai from "../data/pegawai.json";
 // import "./css/Pegawai.css";
 import Navigasi from "./../components/Pagination";
-import axios from "axios";
+// import axios from "axios";
 
 import { Stack, Table, Box, Center, Input } from "@chakra-ui/react";
 
-function Pegawai() {
+export default function Pegawai() {
     const [pegawai, setPegawai] = useState([]);
     const [jlhPegawai, setJlhPegawai] = useState(0);
     const [page, setPage] = useState(1);
@@ -17,11 +17,7 @@ function Pegawai() {
 
     const filteredPegawai = async (val, page) => {
         // console.log(val)
-        try {
-            /*if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
-            }*/
-            // setPage(1);
+        try {            
             const hasil = await fetch(
                 `http://localhost:3000/pegawai?name=${val}&page=${page}`,
             );
@@ -75,7 +71,7 @@ function Pegawai() {
     };
 
     return (
-        <div className="pegawai-page">
+        <div className="pegawai-page" >
             <Input
                 type="text"
                 p="4"
@@ -102,24 +98,21 @@ function Pegawai() {
 
             <div className="table-container">
                 {/*tabel versi chakra*/}
-                <Stack width="full" gap="5">
-                    <Table.Root
-                        size="sm"
-                        css={{
-                            "& th, & td": {
-                                padding: "12px 16px",
-                            },
-                        }}
-                    >
-                        <Table.Header color="red">
-                            <Table.Row>
-                                <Table.ColumnHeader>ID</Table.ColumnHeader>
-                                <Table.ColumnHeader>NIP</Table.ColumnHeader>
-                                <Table.ColumnHeader>Nama</Table.ColumnHeader>
+                <Stack >
+                    <Table.Root css={{
+                        "& th, & td" : {
+                                fontSize: {base:"xs", md:"sm"}
+                            }
+                        }}>
+                        <Table.Header >
+                            <Table.Row position="sticky" top="-30px" left="0">
+                                <Table.ColumnHeader w="10px">ID</Table.ColumnHeader>
+                                <Table.ColumnHeader >NIP</Table.ColumnHeader>
+                                <Table.ColumnHeader minW={{base:"200px", md:"300px"}}>Nama</Table.ColumnHeader>
                                 <Table.ColumnHeader>Status</Table.ColumnHeader>
                                 <Table.ColumnHeader>Gol</Table.ColumnHeader>
-                                <Table.ColumnHeader>Jabatan</Table.ColumnHeader>
-                                <Table.ColumnHeader>Unor</Table.ColumnHeader>
+                                <Table.ColumnHeader minW={{base:"200px", md:"300px"}}>Jabatan</Table.ColumnHeader>
+                                <Table.ColumnHeader minW={{base:"300px", md:"500px"}}>Unor</Table.ColumnHeader>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
@@ -132,17 +125,17 @@ function Pegawai() {
                                         navigate(`/details?id=${item.id}`)
                                     }
                                 >
-                                    <Table.Cell>{item.id}</Table.Cell>
+                                    <Table.Cell w="10px">{item.id}</Table.Cell>
                                     <Table.Cell>{item.nip_baru}</Table.Cell>
-                                    <Table.Cell>{item.nama}</Table.Cell>
+                                    <Table.Cell minW={{base:"200px", md:"300px"}}>{item.nama}</Table.Cell>
                                     <Table.Cell>
                                         {item.status_cpns_pns}
                                     </Table.Cell>
                                     <Table.Cell>
                                         {item.gol_akhir_nama}
                                     </Table.Cell>
-                                    <Table.Cell>{item.jabatan_nama}</Table.Cell>
-                                    <Table.Cell>{item.unor_nama}</Table.Cell>
+                                    <Table.Cell minW={{base:"200px", md:"300px"}}>{item.jabatan_nama}</Table.Cell>
+                                    <Table.Cell minW={{base:"300px", md:"500px"}} >{item.unor_nama}</Table.Cell>
                                 </Table.Row>
                             ))}
                         </Table.Body>
@@ -168,4 +161,4 @@ function Pegawai() {
     );
 }
 
-export default Pegawai;
+// export default Pegawai;
